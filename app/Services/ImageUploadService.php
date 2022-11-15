@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Utility\Contracts\ImageFilenameInterface;
 use Illuminate\Support\Facades\Storage;
 
 class ImageUploadService
 {
-    public function uploadToS3(string $image, string $filename) : string
+    /**
+     * @param string $image
+     * @param ImageFilenameInterface $imageFilename
+     * @return void
+     */
+    public function uploadToS3(string $image, ImageFilenameInterface $imageFilename) : void
     {
-        $imageName = $filename.time().'.png';
-
-        $path = Storage::disk('s3')->url($imageName);
-        $path = Storage::disk('s3')->put($imageName, $image);
-
-        return $imageName;
+        $path = Storage::disk('s3')->put($imageFilename->filename, $image);
     }
 }
