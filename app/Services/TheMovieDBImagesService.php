@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Http;
 
 class TheMovieDBImagesService
 {
-    public function getMoviePoster(string $imagePath) : string
+    /**
+     * @param string $imagePath
+     * @return string
+     */
+    public function getMovieImage(string $imagePath) : string
     {
         return Http::themoviedatabaseimages()
             ->get('/'.$imagePath)
