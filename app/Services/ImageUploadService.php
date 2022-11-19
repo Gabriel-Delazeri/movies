@@ -16,6 +16,6 @@ class ImageUploadService
      */
     public function uploadToS3(string $image, ImageFilenameInterface $imageFilename) : void
     {
-        $path = Storage::disk('s3')->put($imageFilename->filename, $image);
+        Storage::disk('s3')->put($imageFilename->filename, $image);
     }
 }
