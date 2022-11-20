@@ -18,7 +18,7 @@ class MovieController extends Controller
     {
         $movies = Movie::get()->toArray();
 
-        return view('test', compact('movies'));
+        return view('movies.index', compact('movies'));
     }
 
     /**
@@ -31,6 +31,6 @@ class MovieController extends Controller
     {
         $movieVideos = $movie->videos->toArray();
 
-        return view('movievideo', compact('movieVideos'));
+        return view('movies.video', compact('movieVideos'));
     }
 }
