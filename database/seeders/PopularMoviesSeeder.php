@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Jobs\SaveMovieExtraInformationJob;
+use App\Jobs\SaveMovieVideosJob;
 use App\Jobs\UploadTMDBImageJob;
 use App\Models\Movie;
 use App\Services\TheMovieDBService;
@@ -51,7 +52,9 @@ class PopularMoviesSeeder extends Seeder
                 'source_id'      => $popularMovie['id']
             ]);
 
-            SaveMovieExtraInformationJob::dispatch($movie, $popularMovie['id']);
+            SaveMovieExtraInformationJob::withChain([
+                new SaveMovieVideosJob($movie, $popularMovie['id'])
+            ])->dispatch($movie, $popularMovie['id']);
         }
     }
 }
