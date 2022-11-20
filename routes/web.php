@@ -1,10 +1,7 @@
 <?php
 
-use App\Models\Movie;
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $movies = Movie::get()->toArray();
-
-    return view('test', compact('movies'));
-});
+Route::get('/', [MovieController::class, 'index']);
+Route::get('/{movie}/videos', [MovieController::class, 'videos']);
